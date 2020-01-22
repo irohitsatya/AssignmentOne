@@ -5,69 +5,52 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Match {
-    Team team1;
-    Team team2;
 
-    Match(Team team1,Team team2){
-        this.team1=team1;
-        this.team2=team2;
-    }
 
-    public int Delivery() {
+    public static int Delivery() {
         return (int) (Math.random() * 8) - 1;
     }
 
-//    public Bowler chooseBowler(ArrayList<Bowler> bowlingLineup){
-//        Bowler curBowler = bowlingLineup.get(2);
-//
-//        return curBowler;
-//    }
+    public static int oneOrZero(){ return (int) (Math.random() * 2) ;}
 
-    public int oneOrZero(){ return (int) (Math.random() * 2) ;}
-
-
-    public String conductToss(Team team1,Team team2){
-//        System.out.println(team1.name+" "+team2.name);
-
+    public static String conductToss(MatchAdmin admin){
         String tossResult = "";
         Team tempTeam;
         int temp = oneOrZero();
 
         if(temp==0){  //team 1 won toss
-            tossResult = team1.name + " won the toss and elected to";
+            tossResult = admin.team1.name + " won the toss and elected to";
             temp = oneOrZero();
             if(temp == 0){ //chose to bat
                 tossResult += " bat first";
             }
             else { //chose to field
                 tossResult += " field first";
-                tempTeam = team1;
-                team1 = team2;
-                team2 = tempTeam;
-//                System.out.println(team1.name+" "+team2.name);
+                tempTeam = admin.team1;
+                admin.team1 = admin.team2;
+                admin.team2 = tempTeam;
+//                System.out.println(team1.name+" "+team2.name+"toss1");
             }
         }
         else{ //team 2 won toss
-            tossResult = team2.name + " won the toss and elected to";
+            tossResult = admin.team2.name + " won the toss and elected to";
             temp = oneOrZero();
             if(temp == 0){ //chose to bat
                 tossResult += " bat first";
-                tempTeam = team1;
-                team1 = team2;
-                team2 = tempTeam;
-//                System.out.println(team1.name+" "+team2.name);
+                tempTeam = admin.team1;
+                admin.team1 = admin.team2;
+                admin.team2 = tempTeam;
+//                System.out.println(team1.name+" "+admin.team2.name+"toss2");
             }
             else {
                 tossResult += " field first";
             }
         }
-        System.out.println(team1.name+" "+team2.name);
+//        System.out.println(team1.name+" "+team2.name+"toss3");
         return tossResult;
     }
 
-
-
-    public int Innings(Team battingTeam, Team bowlingTeam){
+    public static int Innings(Team battingTeam, Team bowlingTeam){
 
 
         ArrayList<Player> battingLineup = battingTeam.lineUp;
@@ -141,8 +124,7 @@ public class Match {
         return battingTeam.score;
     }
 
-
-    public void Innings(Team battingTeam, Team bowlingTeam,int target){
+    public static void Innings(Team battingTeam, Team bowlingTeam,int target){
 
 
         ArrayList<Player> battingLineup = battingTeam.lineUp;
@@ -218,14 +200,4 @@ public class Match {
         battingTeam.oversPlayed = (i/6)+"."+(i%6);
         return;
     }
-
-
-    public Team getTeam1() {
-        return team1;
-    }
-
-    public Team getTeam2() {
-        return team2;
-    }
-
 }

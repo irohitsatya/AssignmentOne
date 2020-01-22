@@ -9,19 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatchController {
 
     @GetMapping("/cricket")
-    public MatchAdmin admin(){
+    public Scorecard admin(){
         Team t1 =  new Team("IND");
         Team t2 = new Team("AUS");
-        Match match = new Match(t1,t2);
 
 
-        MatchAdmin admin = new MatchAdmin(match);
+        MatchAdmin admin = new MatchAdmin(t1,t2);
         admin.ConductMatch();
 
         Scorecard scorecard = new Scorecard(admin);
-        //return admin;
 
-        return admin;
+        return scorecard;
     }
 
 
