@@ -10,8 +10,8 @@ public class MatchController {
 
     @GetMapping("/cricket")
     public Scorecard admin(){
-        Team t1 =  new Team("IND");
-        Team t2 = new Team("AUS");
+        Team t1 =  new Team("IND",3,4);
+        Team t2 = new Team("AUS",3,4);
 
 
         MatchAdmin admin = new MatchAdmin(t1,t2);
